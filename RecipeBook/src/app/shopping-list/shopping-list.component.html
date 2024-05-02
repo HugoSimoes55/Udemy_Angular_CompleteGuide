@@ -1,6 +1,8 @@
+<h2>Shopping List</h2>
+<hr>
 <div class="row">
 	<div class="col-xs-10">
-		<app-shopping-list-create-edit></app-shopping-list-create-edit>
+		<app-shopping-list-create-edit (ingredientAdded)="onIngredientAdded($event)"></app-shopping-list-create-edit>
 		<hr>
 		<ul class="list-group">
 			<a *ngFor="let ing of ingredients"
