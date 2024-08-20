@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'Recipe Book';
-	linkToShow = "recipes";
-
-	onLinkClicked(link: string) {
-		this.linkToShow = link;
-	}
 }
