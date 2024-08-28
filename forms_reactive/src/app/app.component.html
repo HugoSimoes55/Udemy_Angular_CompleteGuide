@@ -3,23 +3,30 @@
 		<div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
 			<form [formGroup]="signupForm"
 				  (ngSubmit)="onSubmit()">
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text"
-						   id="username"
-						   formControlName="username"
-						   class="form-control">
-					<span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched"
-						  class="help-block">Please enter a valid username.</span>
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="text"
-						   id="email"
-						   formControlName="email"
-						   class="form-control">
-					<span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
-						  class="help-block">Please enter a valid email.</span>
+				<div formGroupName="userData">
+					<div class="form-group">
+						<label for="username">Username</label>
+						<input type="text"
+							   id="username"
+							   formControlName="username"
+							   class="form-control">
+						<span *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched"
+							  class="help-block">
+							<span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']"
+								  class="help-block">This name is invalid.</span>
+							<span *ngIf="signupForm.get('userData.username').errors['required']"
+								  class="help-block">This field is required.</span>
+						</span>
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="text"
+							   id="email"
+							   formControlName="email"
+							   class="form-control">
+						<span *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched"
+							  class="help-block">Please enter a valid email.</span>
+					</div>
 				</div>
 				<div class="radio"
 					 *ngFor="let gender of genders">
@@ -29,6 +36,18 @@
 							   [value]="gender">
 						{{ gender }}
 					</label>
+				</div>
+				<div formArrayName="hobbies">
+					<h4>Your Hobbbies</h4>
+					<button type="button"
+							class="btn btn-default"
+							(click)="onAddHobby()">Add Hobby</button>
+					<div class="form-group"
+						 *ngFor="let hobby of getHobbies(); let i = index">
+						<input type="text"
+							   class="form-control"
+							   [formControlName]="i">
+					</div>
 				</div>
 				<span *ngIf="!signupForm.valid && signupForm.touched"
 					  class="help-block">Please enter valid data.</span>
