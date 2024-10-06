@@ -6,9 +6,10 @@
 		<hr>
 		<ul *ngIf="ingredients.length > 0; else noIngredients"
 			class="list-group">
-			<a *ngFor="let ing of ingredients"
+			<a *ngFor="let ing of ingredients; let i = index"
 			   class="list-group-item"
-			   style="cursor: pointer;">
+			   style="cursor: pointer;"
+			   (click)="onItemSelected(i)">
 				{{ ing.Name }} ({{ ing.Amount }})
 			</a>
 		</ul>
