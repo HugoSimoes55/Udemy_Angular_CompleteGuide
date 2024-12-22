@@ -50,6 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.fetchPosts();
 	}
 
+	onConfirmError() {
+		this.errorText = null;
+	}
+
 	private fetchPosts() {
 		this.isFetching = true;
 
@@ -60,6 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
 		}, error => {
 			console.log(error);
 
+			this.isFetching = false;
 			this.errorText = error.message;
 		});
 	}
